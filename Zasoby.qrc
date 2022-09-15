@@ -1,0 +1,26 @@
+<RCC>
+    <qresource prefix="/grafiki"/>
+    <qresource prefix="/graf">
+        <file>Grafiki/Green_Bow.png</file>
+        <file>Grafiki/Green_Horse.png</file>
+        <file>Grafiki/Green_Shield.png</file>
+        <file>Grafiki/Red_Bow.png</file>
+        <file>Grafiki/Red_Horse.png</file>
+        <file>Grafiki/Red_Shield.png</file>
+        <file>Grafiki/Green_Arrow.png</file>
+        <file>Grafiki/Red_Arrow.png</file>
+        <file>Grafiki/Arrow.png</file>
+        <file>Grafiki/Build_Bow.png</file>
+        <file>Grafiki/Build_Horse.png</file>
+        <file>Grafiki/Build_Shield.png</file>
+        <file>Grafiki/Green_Sword.png</file>
+        <file>Grafiki/Red_Sword.png</file>
+        <file>Grafiki/Build_Bow_Green.png</file>
+        <file>Grafiki/Build_Bow_Red.png</file>
+        <file>Grafiki/Build_Horse_Green.png</file>
+        <file>Grafiki/Build_Horse_Red.png</file>
+        <file>Grafiki/Build_Shield_Green.png</file>
+        <file>Grafiki/Build_Shield_Red.png</file>
+        <file>Grafiki/Simple_Map.png</file>
+    </qresource>
+</RCC>
