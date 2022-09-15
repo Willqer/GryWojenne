@@ -40,7 +40,6 @@ Gui::Gui()
 }
 
 void Gui::drawPanel(int x, int y, int width, int height, QColor color, double opacity){
-    // draws a panel at the specified location with the specified properties
     QGraphicsRectItem* panel = new QGraphicsRectItem(x,y,width,height);
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);

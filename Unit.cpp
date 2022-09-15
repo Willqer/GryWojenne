@@ -13,6 +13,8 @@
 #include <QTimer>
 #include <qmath.h>
 
+#include <QDebug>
+
 extern Game * game;
 
 
@@ -39,11 +41,12 @@ Unit::Unit(size_t speed_def, size_t hp_def,
     }
 
     range_of_attack = field_creator(range,1);
-    sight_of_enemy = field_creator(sight,1);
+    sight_of_enemy = field_creator(sight,-1);
 
 
     //WALKING - lista punktow
-    path_points << this->pos() << QPointF(0,0);
+    path_points << QPointF(500,320);
+    //path_points << this->scenePos() << QPointF(game->scene->width()/2,this->scenePos().y()) << this->scenePos();
     path_indx = 0;
     path_target = path_points[0];
     rotating(path_target);
@@ -90,37 +93,36 @@ void Unit::targeting()
 }
 //CHODZENIE
 void Unit::rotating(QPointF p){
-    if(speed != 0){
-        QLineF ln(pos(),p);
+        QLineF ln(scenePos(),p);
         setRotation(-1 * ln.angle());
-    }
 }
 void Unit::marching(){
     if(game->check_phase_flag() == 1){
         //obrot w kierunku kolejnego punktu gdy w okolicy poprzedniego
-        QLineF ln(pos(),path_target);
+        QLineF ln(scenePos(),path_target);
         if (ln.length() < 5){
              path_indx++;
+             qDebug() << "YEP";
             if ( path_indx >= path_points.size()){
                  return;
             }
             path_target = path_points[path_indx];
             rotating(path_target);
         }
-        // obrot w kierunku celu
+        // ruch w kierunku celu
         double theta = rotation();
         double dy = speed * qSin(qDegreesToRadians(theta));
         double dx = speed * qCos(qDegreesToRadians(theta));
         setPos(x()+dx, y()+dy);
         //kolizja z jednostką
-        QList<QGraphicsItem *> colliding_items = collidingItems();
-        for (int i = 0, n = colliding_items.size(); i < n; ++i){
-            if(typeid(*(colliding_items[i])) == typeid(Unit_Archer) ||
-               typeid(*(colliding_items[i])) == typeid(Unit_Guard) ||
-               typeid(*(colliding_items[i])) == typeid(Unit_Knight)){
-                qDebug() << "KOLIZJA";
-            }
-        }
+//        QList<QGraphicsItem *> colliding_items = collidingItems();
+//        for (int i = 0, n = colliding_items.size(); i < n; ++i){
+//            if(typeid(*(colliding_items[i])) == typeid(Unit_Archer) ||
+//               typeid(*(colliding_items[i])) == typeid(Unit_Guard) ||
+//               typeid(*(colliding_items[i])) == typeid(Unit_Knight)){
+//                qDebug() << "KOLIZJA";
+//            }
+//        }
 
 
 
@@ -129,7 +131,7 @@ void Unit::marching(){
     }
 }
 
-QGraphicsPolygonItem * Unit::field_creator(size_t scale,size_t l_thickness)
+QGraphicsPolygonItem * Unit::field_creator(size_t scale,int l_thickness)
 {
     QGraphicsPolygonItem * field;
     //wzorcowy obszar wokol jednostki
